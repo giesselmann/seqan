@@ -67,7 +67,7 @@ struct ScoreSimdWrapper;
  *
  * Extends a @link SimpleScore @endlink or a @link MatrixScore @endlink for the use with simd vectors.
  */
-
+// TODO specialize this class for SIMD signal alignment
 template <typename TScoreVec, typename TScore>
 class Score<TScoreVec, ScoreSimdWrapper<TScore> >
 {

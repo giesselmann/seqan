@@ -162,7 +162,7 @@ _alignWrapperSequential(TSetH & gapSeqSetH,
 
     String<TScoreValue> results;
     resize(results, length(gapSeqSetH));
-    
+
     auto zipCont = makeZipView(results, gapSeqSetH, gapSeqSetV);
     forEach(zipCont,
             [&] (auto tuple)
@@ -187,8 +187,10 @@ inline auto _alignWrapper(TArgs && ...args)
 {
 // NOTE(marehr): ume_simd is currently not working, thus falling back to sequential case
 #if defined(SEQAN_SIMD_ENABLED) && !defined(SEQAN_UMESIMD_ENABLED)
+    std::cerr << "Using SIMD alignment" << std::endl;
     return _alignWrapperSimd(std::forward<TArgs>(args)...);
 #else
+    std::cerr << "Using sequential alignment" << std::endl;
     return _alignWrapperSequential(std::forward<TArgs>(args)...);
 #endif
 }
